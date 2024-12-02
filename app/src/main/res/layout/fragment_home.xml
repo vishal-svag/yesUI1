@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- Scrollable Content -->
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Recipe Title -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Chorizo and mozzarella gnocchi bake"
+                    android:textAlignment="center"
+                    android:textColor="#364145"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Recipe Image Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="20dp">
+
+                    <ImageView
+                        android:id="@+id/imgRecipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Recipe Image"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/recipe_img" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Servings Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/white"
+                    android:elevation="6dp"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvIngredients"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Servings"
+                            android:textColor="#364145"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/btnMinus"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="@color/white"
+                            android:contentDescription="TODO"
+                            android:src="@drawable/remove_circle" />
+
+                        <TextView
+                            android:id="@+id/tvCounter"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@drawable/bg_border_green"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/btnPlus"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="@color/white"
+                            android:contentDescription="TODO"
+                            android:src="@drawable/add_circle" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Header Section (Title + Arrow Icon) -->
+                        <LinearLayout
+                            android:id="@+id/headerLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/white"
+                                android:contentDescription="TODO"
+                                android:src="@drawable/product" />
+
+                            <!-- Title Text -->
+                            <TextView
+                                android:id="@+id/titleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight="1"
+                                android:text="Add all Ingredients to List"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+                            <!-- Arrow Icon -->
+                            <ImageView
+                                android:id="@+id/arrowIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="Expand/Collapse"
+                                android:src="@drawable/baseline_keyboard_arrow_down_24" />
+                        </LinearLayout>
+
+                        <!-- Expandable Section (Initially Hidden) -->
+                        <LinearLayout
+                            android:id="@+id/expandableLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:visibility="gone">
+
+                            <!-- RecyclerView for CheckBox items -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView"
+                                layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="0dp"
+                                tools:itemCount="6"
+                                tools:listitem="@layout/list_item" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Add to List Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddToList"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/gradient_bg"
+                    android:text="Add to List"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <!-- Circle 1 with TextView -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.yes1.PercentageCircleView
+                            android:id="@+id/circle1"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp" />
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Sodium"
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Circle 2 with TextView -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.yes1.PercentageCircleView
+                            android:id="@+id/circle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp" />
+
+                        <TextView
+                            android:id="@+id/text2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Fats"
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Circle 3 with TextView -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.yes1.PercentageCircleView
+                            android:id="@+id/circle3"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp" />
+
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Protein"
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Circle 4 with TextView -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.yes1.PercentageCircleView
+                            android:id="@+id/circle4"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp" />
+
+                        <TextView
+                            android:id="@+id/text4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Carbs"
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Circle 5 with TextView -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.yes1.PercentageCircleView
+                            android:id="@+id/circle5"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp" />
+
+                        <TextView
+                            android:id="@+id/text5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Fiber"
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Linear Layout for Heading and Image -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- Heading TextView -->
+                            <TextView
+                                android:id="@+id/tvHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Directions"
+                                android:textColor="#6D838B"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <!-- ImageView after Heading -->
+                            <ImageView
+                                android:id="@+id/headingImage"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="8dp"
+                                android:contentDescription="Heading image"
+                                android:src="@drawable/cam" />
+
+                            <ImageButton
+                                android:id="@+id/btnToggle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|end"
+                                android:layout_marginStart="170dp"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="Toggle Expand"
+                                android:src="@drawable/baseline_keyboard_arrow_down_24" />
+
+                        </LinearLayout>
+
+                        <!-- TextView for Directions (Expandable) -->
+                        <TextView
+                            android:id="@+id/tvExpandableText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="4dp"
+                            android:maxLines="3"
+                            android:paddingEnd="1dp"
+                            android:text="1. Preheat the oven's broiler and set the oven rack at about 6 inches from the heat source; prepare the rack of a broiler pan with cooking spray.\n\n2. Season the salmon with salt and pepper and arrange onto the prepared broiler pan. Whisk together the brown sugar and Dijon mustard in a small bowl; spoon mixture evenly onto top of salmon fillets."
+                            android:textColor="#6D838B"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
